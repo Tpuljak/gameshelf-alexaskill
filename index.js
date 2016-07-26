@@ -22,6 +22,7 @@ GameShelf.prototype.eventHandlers.onLaunch = function (launchRequest, session, r
   } else {
     var speechOutput = "Welcome to Game shelf, how many players do you have?";
     var repromptText = "How many players do you have?";
+
     response.ask(speechOutput, repromptText);
   };
 };
@@ -36,11 +37,25 @@ GameShelf.prototype.intentHandlers = {
     if(!session.user.accessToken) {
       response.tellWithLinkAccount("You must have a linked game shelf account to use this skill. Please use the alexa app to link your account.");
     } else {
+      if (isNaN(intent.slots.players.value)) {
+          repromptText = "How many players do you have?";
+          speechOutput = "I'm sorry, I didn't understand that number. " + repromptText;
+          response.ask(speechOutput, repromptText);
+          return;
+      }
+
       getGameFromGameShelf(intent, session, response);
     };
   },
 
   "DialogGameShelfIntent": function (intent, session, response) {
+    if (isNaN(intent.slots.players.value)) {
+        repromptText = "How many players do you have?";
+        speechOutput = "I'm sorry, I didn't understand that number. " + repromptText;
+        response.ask(speechOutput, repromptText);
+        return;
+    }
+
     getGameFromGameShelf(intent, session, response);
   }
 };
