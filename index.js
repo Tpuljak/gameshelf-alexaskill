@@ -36,73 +36,47 @@ GameShelf.prototype.intentHandlers = {
     if(!session.user.accessToken) {
       response.tellWithLinkAccount("You must have a linked game shelf account to use this skill. Please use the alexa app to link your account.");
     } else {
-      console.log(intent.slots.players.value)
-      var options = {
-        host: "quiet-refuge-93160.herokuapp.com",
-        path: "/api/v1/usersgames/random",
-        method: "GET",
-        headers: {
-          "accessToken": session.user.accessToken,
-          "players": intent.slots.players.value
-        }
-      }
-      https.get(options, function(res) {
-        var body = ''; // Will contain the final response
-        // Received data is a buffer.
-        // Adding it to our body
-        res.on('data', function(data){
-          body += data;
-        });
-        // After the response is completed, parse it and log it to the console
-        res.on('end', function() {
-          var parsed = JSON.parse(body);
-          console.log(parsed.game.name);
-          var answer = "You should play " + parsed.game.name
-          response.tellWithCard(answer, "Gameshelf", answer);
-        });
-      })
-      // If any error has occured, log error to console
-      .on('error', function(e) {
-        console.log("Got error: " + e.message);
-      });
+      getGameFromGameShelf(intent, session, response);
     };
   },
 
   "DialogGameShelfIntent": function (intent, session, response) {
-    console.log(intent.slots.players.value)
-    var options = {
-      host: "quiet-refuge-93160.herokuapp.com",
-      path: "/api/v1/usersgames/random",
-      method: "GET",
-      headers: {
-        "accessToken": session.user.accessToken,
-        "players": intent.slots.players.value
-      }
-    }
-    https.get(options, function(res) {
-      var body = ''; // Will contain the final response
-      // Received data is a buffer.
-      // Adding it to our body
-      res.on('data', function(data){
-        body += data;
-      });
-      // After the response is completed, parse it and log it to the console
-      res.on('end', function() {
-        var parsed = JSON.parse(body);
-        console.log(parsed.game.name);
-        var answer = "You should play " + parsed.game.name
-        response.tellWithCard(answer, "Gameshelf", answer);
-      });
-    })
-    // If any error has occured, log error to console
-    .on('error', function(e) {
-      console.log("Got error: " + e.message);
-    });
+    getGameFromGameShelf(intent, session, response);
   }
 };
 
+var getGameFromGameShelf = function(intent, session, response) {
+  var options = {
+    host: "quiet-refuge-93160.herokuapp.com",
+    path: "/api/v1/usersgames/random",
+    method: "GET",
+    headers: {
+      "accessToken": session.user.accessToken,
+      "players": intent.slots.players.value
+    }
+  }
+
+  https.get(options, function(res) {
+    var body = '';
+
+    res.on('data', function(data){
+      body += data;
+    });
+
+    res.on('end', function() {
+      var parsed = JSON.parse(body);
+      console.log(parsed.game.name);
+      var answer = "You should play " + parsed.game.name
+      response.tellWithCard(answer, "Gameshelf", answer);
+    });
+  })
+
+  .on('error', function(e) {
+    console.log("Got error: " + e.message);
+  });
+};
+
 exports.handler = function (event, context) {
-  // Create an instance of the GameShelf skill.
   var gameshelf = new GameShelf();
   gameshelf.execute(event, context);
 };
