@@ -1,0 +1,9 @@
+OneshotGameShelfIntent to find a {players} player game
+OneshotGameShelfIntent to find a {players} person game
+OneshotGameShelfIntent to retrieve a {players} player game
+OneshotGameShelfIntent to retrieve a {players} person game
+OneshotGameShelfIntent to get a {players} player game
+OneshotGameShelfIntent to get a {players} person game
+DialogGameShelfIntent {players}
+DialogGameShelfIntent {players} players
+DialogGameShelfIntent {players} people

@@ -1,0 +1,22 @@
+{
+  "intents": [
+    {
+      "intent": "OneshotGameShelfIntent",
+      "slots": [
+        {
+          "name": "players",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
+      "intent": "DialogGameShelfIntent",
+      "slots": [
+        {
+          "name": "players",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    }
+  ]
+}
