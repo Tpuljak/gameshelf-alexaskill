@@ -1,8 +1,5 @@
 # gameshelf-alexaskill
 
-## Amazon Alexa Skill
-[Amazon Alexa Skill on GitHub](https://github.com/kbedell/gameshelf-alexaskill)
-
 ## Gameshelf Link
 [Github Link](https://github.com/kbedell/gameshelf)
 
@@ -26,9 +23,9 @@ These instructions assume Gameshelf is up, and running with Login with Amazon se
 2. Create a new lambda function. Please refer to [Amazon's Instructions](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/developing-an-alexa-skill-as-a-lambda-function) DO NOT UPLOAD YOUR CODE JUST YET! (You can choose inline code, and just leave it as the default.)
 3. Create a new skill in the developer portal. Please refer to [Amazon's Instructions](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/deploying-a-sample-skill-to-aws-lambda#Creating a New Skill for the Sample on the Developer Portal)
 4. Make the following edits to your index.js file
-* Enter your app id in the APP_ID variable: `var APP_ID = UNDEFINED;`
-* Update the `getGameFromGameShelf` function to use the host that you are using. By default it points to the current live version of Gameshelf:
-```
+    -  Enter your app id in the APP_ID variable: `var APP_ID = UNDEFINED;`
+    -  Update the `getGameFromGameShelf` function to use the host that you are using. By default it points to the current live version of Gameshelf:
+    - ```
 ...
 var getGameFromGameShelf = function(intent, session, response) {
   var options = {
