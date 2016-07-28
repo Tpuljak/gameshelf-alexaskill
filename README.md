@@ -25,7 +25,7 @@ These instructions assume Gameshelf is up, and running with Login with Amazon se
 4. Make the following edits to your index.js file
     -  Enter your app id in the APP_ID variable: `var APP_ID = UNDEFINED;`
     -  Update the `getGameFromGameShelf` function to use the host that you are using. By default it points to the current live version of Gameshelf:
-    - ```
+```
 ...
 var getGameFromGameShelf = function(intent, session, response) {
   var options = {
