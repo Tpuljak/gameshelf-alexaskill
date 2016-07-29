@@ -81,8 +81,13 @@ var getGameFromGameShelf = function(intent, session, response) {
     res.on('end', function() {
       var parsed = JSON.parse(body);
       console.log(parsed.game.name);
-      var answer = "You should play " + parsed.game.name
-      response.tellWithCard(answer, "Gameshelf", answer);
+      if(parsed.game.name === undefined) {
+        var answer = "Sorry, I couldn't find a game that matches your needs."
+        response.tellWithCard(answer, "Gameshelf", answer);
+      } else {
+        var answer = "You should play " + parsed.game.name
+        response.tellWithCard(answer, "Gameshelf", answer);
+      }
     });
   })
 
